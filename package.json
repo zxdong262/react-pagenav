@@ -1,0 +1,48 @@
+{
+  "name": "react-pagenav",
+  "version": "0.0.1",
+  "description": "react pagenav component",
+  "main": "src/react-pagenav.jsx",
+  "scripts": {
+    "dev": "webpack-dev-server --inline --hot --content-base static/ --history-api-fallback --open --port 8082"
+  },
+  "author": {
+    "email": "zxdong@gmail.com",
+    "name": "ZHAO Xudong",
+    "url": "^0.10.3"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zxdong262/react-pagenav"
+  },
+  "keywords": [
+    "react",
+    "pagenav"
+  ],
+  "devDependencies": {
+    "babel-core": "^6.9.1",
+    "babel-eslint": "^6.0.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-es2015-loose": "^7.0.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-preset-stage-1": "^6.5.0",
+    "babel-preset-stage-2": "^6.5.0",
+    "raw-loader": "^0.5.1",
+    "react-addons-test-utils": "^15.1.0",
+    "run-sequence": "^1.2.1",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/zxdong262/react-pagenav/issues"
+  },
+  "homepage": "https://github.com/zxdong262/react-pagenav"
+}
