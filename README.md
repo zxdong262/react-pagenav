@@ -3,7 +3,7 @@ react pagenav component
 
 ## get
 ```bash
-npm install vue-pagenav
+npm install react-pagenav
 ```
 
 ## use
