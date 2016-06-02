@@ -1,4 +1,6 @@
 # react-pagenav
+[![Build Status](https://travis-ci.org/zxdong262/react-pagenav.svg?branch=master)](https://travis-ci.org/zxdong262/react-pagenav)
+
 react pagenav component
 
 ## get
@@ -238,11 +240,12 @@ ReactPagenav.default.prevHtml = '<'
 }
 ```
 
-## demo/dev
+## test/demo/dev
 ```bash
 git clone https://github.com/zxdong262/react-pagenav.git
 cd react-pagenav
 npm install
+npm run dev
 npm run test
 
 # then visit http://localhost:8082
