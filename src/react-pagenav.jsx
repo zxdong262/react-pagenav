@@ -33,14 +33,13 @@ export default class ReactPagenav extends Component {
 		}
 	}
 
-	buildUnits() {
+	static buildUnits(props) {
 
 		var option = ReactPagenav.default
-		var th = this
-		var page = th.props.page || option.page
-		var pageSize = th.props.pageSize || option.pageSize
-		var total = th.props.total || option.total
-		var maxLink = th.props.maxLink >5?th.props.maxLink:5
+		var page = props.page || option.page
+		var pageSize = props.pageSize || option.pageSize
+		var total = props.total || option.total
+		var maxLink = props.maxLink >5?props.maxLink:5
 
 		var linksCount = Math.ceil(total/pageSize)
 
@@ -161,7 +160,7 @@ export default class ReactPagenav extends Component {
 
 	render() {
 
-		var units = this.buildUnits()
+		var units = ReactPagenav.buildUnits(this.props)
 
 		return (
 			<nav className="zpagenav">

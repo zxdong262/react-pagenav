@@ -1,0 +1,36 @@
+{
+  "name": "react-pagenav",
+  "version": "0.0.2",
+  "homepage": "http://html5beta.com/apps/react-pagenav.html",
+  "author": {
+    "email": "zxdong@gmail.com",
+    "name": "ZHAO Xudong",
+    "url": "http://html5beta.com"
+  },
+  "description": "react pagenav component",
+  "bugs": "https://github.com/zxdong262/react-pagenav/issues",
+  "main": "dist/react-pagenav.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "react",
+    "pagenav"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "static",
+    "src/index.jsx",
+    "src/app.jsx"
+  ],
+  "dependencies": { 
+    "react": "^15.1.0"
+  },
+  "devDependencies": {
+    "jquery": "^2.1.1"
+  }
+}

@@ -2,9 +2,9 @@ var webpack = require('webpack')
 var path = require('path')
 
 module.exports = {
-	entry: [
-		'./src/index.jsx'
-	],
+	entry: {
+		app: './src/index.jsx',
+	},
 	output: {
 		filename: 'bundle.js',
 		publicPath: '/lib/',

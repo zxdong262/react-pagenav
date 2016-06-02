@@ -1,10 +1,11 @@
 {
   "name": "react-pagenav",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "react pagenav component",
   "main": "src/react-pagenav.jsx",
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot --content-base static/ --history-api-fallback --open --port 8082"
+    "dev": "gulp watch",
+    "build": "gulp build"
   },
   "author": {
     "email": "zxdong@gmail.com",
@@ -24,12 +25,30 @@
     "babel-core": "^6.9.1",
     "babel-eslint": "^6.0.4",
     "babel-loader": "^6.2.4",
+    "babel-plugin-transform-es2015-modules-factory": "^6.0.0",
+    "babel-plugin-transform-es2015-modules-umd": "^6.8.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-es2015-loose": "^7.0.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "babel-preset-stage-1": "^6.5.0",
     "babel-preset-stage-2": "^6.5.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-concat-util": "^0.5.5",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.6",
+    "karma": "*",
+    "karma-chai-plugins": "*",
+    "karma-coverage": "*",
+    "karma-mocha": "*",
+    "karma-phantomjs-launcher": "*",
+    "mocha": "*",
+    "phantomjs-prebuilt": "*",
     "raw-loader": "^0.5.1",
     "react-addons-test-utils": "^15.1.0",
     "run-sequence": "^1.2.1",
@@ -38,8 +57,8 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "react": "*",
-    "react-dom": "*"
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
   },
   "bugs": {
     "url": "https://github.com/zxdong262/react-pagenav/issues"
