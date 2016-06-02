@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import ReactPagenav from './react-pagenav.jsx'
 
-ReactPagenav.default.prevHtml = '<'
-
 export default class App extends Component {
 
 	state = {

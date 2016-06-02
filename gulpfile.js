@@ -76,7 +76,7 @@ var exec = require('child_process').exec
 gulp.task('babel-dist', function (cb) {
 	exec(
 		`babel src/react-pagenav.jsx -o dist/react-pagenav.min.js -s --minified &&
-		 babel src/react-pagenav.jsx -o dist/react-pagenav.js &&
+		 babel src/react-pagenav.jsx -o dist/react-pagenav.js
 		 `
 		 , function (err, stdout, stderr) {
 		console.log(stdout)

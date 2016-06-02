@@ -1,6 +1,6 @@
 /**
  * react-pagenav
- * @version v0.0.2 - 2016-06-02
+ * @version v0.0.3 - 2016-06-02
  * @link https://github.com/zxdong262/react-pagenav
  * @author ZHAO Xudong (zxdong@gmail.com)
  * @license MIT License, http://www.opensource.org/licenses/MIT
