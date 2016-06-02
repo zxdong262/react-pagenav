@@ -3,6 +3,9 @@
 
 react pagenav component
 
+## doc/demo
+visit [http://html5beta.com/apps/react-pagenav.html](http://html5beta.com/apps/react-pagenav.html)
+
 ## get
 ```bash
 npm install react-pagenav
@@ -240,7 +243,7 @@ ReactPagenav.default.prevHtml = '<'
 }
 ```
 
-## test/demo/dev
+## test/dev
 ```bash
 git clone https://github.com/zxdong262/react-pagenav.git
 cd react-pagenav
