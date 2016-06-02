@@ -9,6 +9,10 @@ visit [http://html5beta.com/apps/react-pagenav.html](http://html5beta.com/apps/r
 ## get
 ```bash
 npm install react-pagenav
+
+#or
+bower install react-pagenav
+
 ```
 
 ## use
