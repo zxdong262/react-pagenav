@@ -1,11 +1,12 @@
 {
   "name": "react-pagenav",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "react pagenav component",
   "main": "src/react-pagenav.jsx",
   "scripts": {
     "dev": "gulp watch",
-    "build": "gulp build"
+    "build": "gulp build",
+    "test": "gulp test"
   },
   "author": {
     "email": "zxdong@gmail.com",
