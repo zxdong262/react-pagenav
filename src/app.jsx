@@ -27,8 +27,6 @@ export default class App extends Component {
 	}
 
 	render() {
-		console.log('render')
-		console.log(this.state)
 
 		var createPageUrl = function(unit) {
 			return '#p?page=' + unit.page
@@ -38,7 +36,6 @@ export default class App extends Component {
 
 		return (
 			<div>
-				<h1>react-pagenav</h1>
 				<div>
 					{
 						names.map(function(name, index) {
@@ -51,6 +48,7 @@ export default class App extends Component {
 						}, this)
 					}
 				</div>
+				<hr />
 				<ReactPagenav {...this.state} onLinkClick={this.handleClick} createPageUrl={createPageUrl}></ReactPagenav>
 			</div>
 		)

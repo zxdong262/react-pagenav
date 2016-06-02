@@ -25,7 +25,8 @@
     "test",
     "static",
     "src/index.jsx",
-    "src/app.jsx"
+    "src/app.jsx",
+    "public"
   ],
   "dependencies": { 
     "react": "^15.1.0"

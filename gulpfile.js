@@ -31,22 +31,20 @@ var banner = gutil.template('/**\n' +
 
 
 // SCRIPTS
-gulp.task('dist', function() {
 
-	console.log('build', pkg.name, pkg.version)
-	runSequence('babel-dist', 'add-header')
-
-})
+var rep = function(src, filePath) { 
+	console.log(filePath)
+	return src.replace('global.react', 'global.React')
+						.replace('global.reactPagenav', 'global.ReactPagenav')
+						.replace('global.app', 'global.App')
+	
+}
 
 gulp.task('add-header', function() {
 
 	var src1 = './dist/react-pagenav.js'
 	var src2 = './dist/react-pagenav.min.js'
-	var rep = function(src, filePath) { 
-    return src.replace('global.react', 'global.React')
-    					.replace('global.reactPagenav', 'global.ReactPagenav')
-    
-  }
+
 	gulp.src(src1)
 	.pipe( concat('react-pagenav.js', { process: rep }) )
 	.pipe(concat.header(banner))
@@ -59,24 +57,54 @@ gulp.task('add-header', function() {
 
 })
 
+gulp.task('add-header-app', function() {
+
+	gulp.src('./public/app.js')
+	.pipe( concat('app.js', { process: rep }) )
+	.pipe(concat.header(banner))
+	.pipe(gulp.dest('public'))
+
+	gulp.src('./public/app.min.js')
+	.pipe( concat('app.min.js', { process: rep }) )
+	.pipe(concat.header(banner))
+	.pipe(gulp.dest('public'))
+
+})
+
 var exec = require('child_process').exec
- 
+
 gulp.task('babel-dist', function (cb) {
-  exec('babel src/react-pagenav.jsx -o dist/react-pagenav.min.js -s --minified && babel src/react-pagenav.jsx -o dist/react-pagenav.js', function (err, stdout, stderr) {
-    console.log(stdout)
-    console.log(stderr)
-    cb(err)
-  })
+	exec(
+		`babel src/react-pagenav.jsx -o dist/react-pagenav.min.js -s --minified &&
+		 babel src/react-pagenav.jsx -o dist/react-pagenav.js &&
+		 `
+		 , function (err, stdout, stderr) {
+		console.log(stdout)
+		console.log(stderr)
+		cb(err)
+	})
+})
+
+gulp.task('babel-dist-app', function (cb) {
+	exec(
+		`babel src/app.jsx -o public/app.min.js -s --minified &&
+		 babel src/app.jsx -o public/app.js
+		 `
+		 , function (err, stdout, stderr) {
+		console.log(stdout)
+		console.log(stderr)
+		cb(err)
+	})
 })
 
 //webpack
 gulp.task('webpack-dev',  function (cb) {
 
-  exec('webpack-dev-server --inline --hot --content-base static/ --history-api-fallback --open --port 8082', function (err, stdout, stderr) {
-    cb(stdout)
-    cb(stderr)
-    cb(err)
-  })
+	exec('webpack-dev-server --inline --hot --content-base static/ --history-api-fallback --open --port 8082', function (err, stdout, stderr) {
+		cb(stdout)
+		cb(stderr)
+		cb(err)
+	})
 
 })
 
@@ -107,6 +135,23 @@ gulp.task('karma:unit', function() {
 // DEFAULT
 gulp.task('watch', function() {
 	runSequence(['watch-file', 'webpack-dev'])
+})
+gulp.task('dist1', function() {
+
+	runSequence('babel-dist', 'add-header')
+
+})
+gulp.task('dist2', function() {
+
+	runSequence('babel-dist-app', 'add-header-app')
+
+})
+
+gulp.task('dist', function() {
+
+	console.log('build', pkg.name, pkg.version)
+	runSequence('dist1', 'dist2')
+
 })
 gulp.task('default', ['watch'])
 gulp.task('build', ['dist'])
