@@ -17,8 +17,10 @@ bower install react-pagenav
 
 ## use
 
-### baisc es6+ uses
+### uses
 ```jsx
+
+//baisc es6+
 import React, { Component, PropTypes } from 'react'
 import ReactPagenav from 'react-pagenav'
 
@@ -44,8 +46,6 @@ export default class App extends Component {
             return '#p?page=' + unit.page
         }
 
-        var names = Object.keys(this.state)
-
         return (
             <div>
                 <ReactPagenav {...this.state} onLinkClick={this.handleClick} createPageUrl={createPageUrl}></ReactPagenav>
@@ -54,7 +54,14 @@ export default class App extends Component {
 
     }
 }
+
+//in a global or commonjs/amd env, might need use exports.default
+var ReactPagenav = window.ReactPagenav.default
+
+//or
+var ReactPagenav = require('react-pagenv').default
 ```
+
 
 ### settings
 ```javascript
