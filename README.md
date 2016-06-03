@@ -16,8 +16,6 @@ bower install react-pagenav
 ```
 
 ## use
-
-### uses
 ```jsx
 
 //baisc es6+
@@ -63,7 +61,7 @@ var ReactPagenav = require('react-pagenv').default
 ```
 
 
-### settings
+## settings
 ```javascript
 
 //ReactPagenav default
