@@ -39,7 +39,7 @@ export default class App extends Component {
 						names.map(function(name, index) {
 							return (
 								<div key={index} className="form-group" >
-									<label>{name}</label>
+									<label>*{name}</label>
 									<input className="form-control" type="value" name={name} onChange={this.handleChange.bind(this, name)} value={this.state[name]} />
 								</div>
 							)

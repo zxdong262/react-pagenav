@@ -1,6 +1,5 @@
 //just for watch
 import '../static/index.html'
-import '../static/style.css'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
