@@ -35,13 +35,13 @@ export default class App extends Component {
         super(props)
     }
 
-    handleClick = (page, e) => {
+    handleClick = (page, url, e) => {
         this.setState({ page: page })
     }
     render() {
 
         var createPageUrl = function(unit) {
-            return '#p?page=' + unit.page
+            return return unit.page  === 1?'':'#p=' + unit.page
         }
 
         return (
@@ -75,7 +75,7 @@ static default = {
     ,nextSrHtml: 'Next' //for screen reader
     ,dotsHtml: '...'
     ,createPageUrl: function(unit) {
-        return '#p=' + unit.page
+        return unit.page  === 1?'':'#p=' + unit.page
     }
 }
 
