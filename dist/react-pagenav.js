@@ -1,6 +1,6 @@
 /**
  * react-pagenav
- * @version v0.2.1 - 2016-06-14
+ * @version v0.3.0 - 2016-06-14
  * @link https://github.com/zxdong262/react-pagenav
  * @author ZHAO Xudong (zxdong@gmail.com)
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -116,13 +116,13 @@
 				if (unit.isPager) {
 					sr = _react2.default.createElement('span', { className: 'sr-only', dangerouslySetInnerHTML: { __html: unit.srHtml } });
 				}
-
+				var url = stats.createPageUrl(unit);
 				return _react2.default.createElement(
 					'li',
-					{ key: index, onClick: _this.handleClick.bind(_this, unit.page), className: 'page-item ' + unit.class },
+					{ key: index, onClick: _this.handleClick.bind(_this, unit.page, url), className: 'page-item ' + unit.class },
 					_react2.default.createElement(
 						'a',
-						{ className: 'page-link', href: stats.createPageUrl(unit), 'aria-label': unit.ariaLabel },
+						{ className: 'page-link', href: url, 'aria-label': unit.ariaLabel },
 						span,
 						sr
 					)
@@ -134,9 +134,9 @@
 
 		_createClass(ReactPagenav, [{
 			key: 'handleClick',
-			value: function handleClick(page, e) {
+			value: function handleClick(page, url, e) {
 				if (this.props.onLinkClick) {
-					this.props.onLinkClick(page, e);
+					this.props.onLinkClick(page, url, e);
 				}
 			}
 		}, {

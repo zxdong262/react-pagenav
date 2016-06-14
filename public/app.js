@@ -1,6 +1,6 @@
 /**
  * react-pagenav
- * @version v0.2.1 - 2016-06-14
+ * @version v0.3.0 - 2016-06-14
  * @link https://github.com/zxdong262/react-pagenav
  * @author ZHAO Xudong (zxdong@gmail.com)
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -127,7 +127,7 @@
 				maxLink: 5
 			};
 
-			_this.handleClick = function (page, e) {
+			_this.handleClick = function (page, url, e) {
 				_this.setState({ page: page });
 			};
 

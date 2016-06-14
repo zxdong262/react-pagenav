@@ -28,9 +28,9 @@ export default class ReactPagenav extends Component {
 		super(props)
 	}
 
-	handleClick(page, e) {
+	handleClick(page, url, e) {
 		if (this.props.onLinkClick) {
-			this.props.onLinkClick(page, e)
+			this.props.onLinkClick(page, url, e)
 		}
 	}
 
@@ -148,10 +148,10 @@ export default class ReactPagenav extends Component {
 		if(unit.isPager) {
 			sr = <span className="sr-only" dangerouslySetInnerHTML={ {__html: unit.srHtml} } />
 		}
-
+		var url = stats.createPageUrl(unit)
 		return (
-			<li key={index} onClick={this.handleClick.bind(this, unit.page)} className={'page-item ' + unit.class}>
-				<a className="page-link" href={stats.createPageUrl(unit)} aria-label={unit.ariaLabel}>
+			<li key={index} onClick={this.handleClick.bind(this, unit.page, url)} className={'page-item ' + unit.class}>
+				<a className="page-link" href={url} aria-label={unit.ariaLabel}>
 					{span}
 					{sr}
 				</a>

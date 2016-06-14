@@ -14,7 +14,7 @@ export default class App extends Component {
 		super(props)
 	}
 
-	handleClick = (page, e) => {
+	handleClick = (page, url, e) => {
 		this.setState({ page: page })
 	}
 
