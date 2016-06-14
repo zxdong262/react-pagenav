@@ -119,6 +119,8 @@ describe('react-pagenav', function () {
 				var pts = $('#sandbox').find('.page-item')
 				expect(pts.length).to.equal(9)
 				expect($('#sandbox').find('.page-item.active').text()).to.equal('4')
+				//console.log($('#sandbox').find('.page-item').eq(1))
+				expect($('#sandbox').find('.page-item').eq(1).find('a').prop('href').indexOf('#') === -1).to.equal(true)
 				done()
 			})
 		})

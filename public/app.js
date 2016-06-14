@@ -1,6 +1,6 @@
 /**
  * react-pagenav
- * @version v0.2.0 - 2016-06-07
+ * @version v0.2.1 - 2016-06-14
  * @link https://github.com/zxdong262/react-pagenav
  * @author ZHAO Xudong (zxdong@gmail.com)
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -144,7 +144,7 @@
 			value: function render() {
 
 				var createPageUrl = function createPageUrl(unit) {
-					return '#p?page=' + unit.page;
+					return unit.page === 1 ? '' : '#p=' + unit.page;
 				};
 
 				var names = Object.keys(this.state);
@@ -162,6 +162,7 @@
 								_react2.default.createElement(
 									'label',
 									null,
+									'*',
 									name
 								),
 								_react2.default.createElement('input', { className: 'form-control', type: 'value', name: name, onChange: this.handleChange.bind(this, name), value: this.state[name] })

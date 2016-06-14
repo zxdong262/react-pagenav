@@ -20,7 +20,7 @@ export default class ReactPagenav extends Component {
 		,nextSrHtml: 'Next'
 		,dotsHtml: '...'
 		,createPageUrl: function(unit) {
-			return '#p=' + unit.page
+			return unit.page  === 1?'':'#p=' + unit.page
 		}
 	}
 
@@ -130,6 +130,7 @@ export default class ReactPagenav extends Component {
 		return units
 		//end unit
 	}
+
 
 	createUnit = (unit, index) => {
 

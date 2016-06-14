@@ -27,7 +27,7 @@ export default class App extends Component {
 	render() {
 
 		var createPageUrl = function(unit) {
-			return '#p?page=' + unit.page
+			return unit.page  === 1?'':'#p=' + unit.page
 		}
 
 		var names = Object.keys(this.state)

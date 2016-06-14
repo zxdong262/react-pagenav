@@ -1,6 +1,6 @@
 {
   "name": "react-pagenav",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "react pagenav component",
   "main": "dist/react-pagenav.js",
   "scripts": {

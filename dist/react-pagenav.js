@@ -1,6 +1,6 @@
 /**
  * react-pagenav
- * @version v0.2.0 - 2016-06-07
+ * @version v0.2.1 - 2016-06-14
  * @link https://github.com/zxdong262/react-pagenav
  * @author ZHAO Xudong (zxdong@gmail.com)
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -279,7 +279,7 @@
 		nextSrHtml: 'Next',
 		dotsHtml: '...',
 		createPageUrl: function createPageUrl(unit) {
-			return '#p=' + unit.page;
+			return unit.page === 1 ? '' : '#p=' + unit.page;
 		}
 	};
 	exports.default = ReactPagenav;

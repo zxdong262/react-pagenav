@@ -21,13 +21,17 @@ var src = {
 	,dist: 'dist'
 }
 
-var banner = gutil.template('/**\n' +
+function banner() {
+	var pkg = JSON.parse(fs.readFileSync('package.json').toString())
+	return gutil.template('/**\n' +
 	' * <%= pkg.name %>\n' +
 	' * @version v<%= pkg.version %> - <%= today %>\n' +
 	' * @link <%= pkg.homepage %>\n' +
 	' * @author <%= pkg.author.name %> (<%= pkg.author.email %>)\n' +
 	' * @license MIT License, http://www.opensource.org/licenses/MIT\n' +
 	' */\n\n', { file: '', pkg: pkg, today: new Date().toISOString().substr(0, 10) })
+
+}
 
 
 // SCRIPTS
@@ -47,12 +51,12 @@ gulp.task('add-header', function() {
 
 	gulp.src(src1)
 	.pipe( concat('react-pagenav.js', { process: rep }) )
-	.pipe(concat.header(banner))
+	.pipe(concat.header(banner()))
 	.pipe(gulp.dest(src.dist))
 
 	gulp.src(src2)
 	.pipe( concat('react-pagenav.min.js', { process: rep }) )
-	.pipe(concat.header(banner))
+	.pipe(concat.header(banner()))
 	.pipe(gulp.dest(src.dist))
 
 })
@@ -61,12 +65,12 @@ gulp.task('add-header-app', function() {
 
 	gulp.src('./public/app.js')
 	.pipe( concat('app.js', { process: rep }) )
-	.pipe(concat.header(banner))
+	.pipe(concat.header(banner()))
 	.pipe(gulp.dest('public'))
 
 	gulp.src('./public/app.min.js')
 	.pipe( concat('app.min.js', { process: rep }) )
-	.pipe(concat.header(banner))
+	.pipe(concat.header(banner()))
 	.pipe(gulp.dest('public'))
 
 })
