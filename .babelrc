@@ -5,5 +5,4 @@
     "stage-0",
     "stage-1"
   ]
-  ,"plugins": ["transform-es2015-modules-umd"]
 }
