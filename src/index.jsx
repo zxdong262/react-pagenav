@@ -1,5 +1,4 @@
 //just for watch
-import '../static/index.html'
 
 import React from 'react'
 import ReactDOM from 'react-dom'

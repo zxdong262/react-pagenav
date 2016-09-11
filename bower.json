@@ -24,9 +24,8 @@
     "bower_components",
     "test",
     "static",
-    "src/index.jsx",
-    "src/app.jsx",
-    "public"
+    "src",
+    "dist/app*"
   ],
   "dependencies": { 
     "react": "^15.1.0"

@@ -63,57 +63,28 @@ gulp.task('add-header', function() {
 
 gulp.task('add-header-app', function() {
 
-	gulp.src('./public/app.js')
+	gulp.src('./dist/app.js')
 	.pipe( concat('app.js', { process: rep }) )
 	.pipe(concat.header(banner()))
 	.pipe(gulp.dest('public'))
 
-	gulp.src('./public/app.min.js')
+	gulp.src('./dist/app.min.js')
 	.pipe( concat('app.min.js', { process: rep }) )
 	.pipe(concat.header(banner()))
 	.pipe(gulp.dest('public'))
-
 })
 
 var exec = require('child_process').exec
 
-gulp.task('babel-dist', function (cb) {
-	exec(
-		`babel src/react-pagenav.jsx -o dist/react-pagenav.min.js -s --minified &&
-		 babel src/react-pagenav.jsx -o dist/react-pagenav.js
-		 `
-		 , function (err, stdout, stderr) {
-		console.log(stdout)
-		console.log(stderr)
-		cb(err)
-	})
-})
-
-gulp.task('babel-dist-app', function (cb) {
-	exec(
-		`babel src/app.jsx -o public/app.min.js -s --minified &&
-		 babel src/app.jsx -o public/app.js
-		 `
-		 , function (err, stdout, stderr) {
-		console.log(stdout)
-		console.log(stderr)
-		cb(err)
-	})
-})
-
-//webpack
-gulp.task('webpack-dev',  function (cb) {
-
-	exec('webpack-dev-server --inline --hot --content-base static/ --history-api-fallback --open --port 8082', function (err, stdout, stderr) {
-		cb(stdout)
-		cb(stderr)
-		cb(err)
-	})
-
-})
-
-
 //watch
+gulp.task('watch-rp',  function () {
+
+	watch([src.dist + '/react-pagenav.jsx', __dirname + '/package.json'], function() {
+		runSequence('dist')
+	})
+
+})
+
 gulp.task('watch-file',  function () {
 
 	watch([src.cwd + '/react-pagenav.jsx', __dirname + '/package.json'], function() {
@@ -160,7 +131,4 @@ gulp.task('dist', function() {
 gulp.task('default', ['watch'])
 gulp.task('build', ['dist'])
 gulp.task('test', ['karma:unit'])
-gulp.task('dt', function() {
-	runSequence('dist', 'test')
-})
 
