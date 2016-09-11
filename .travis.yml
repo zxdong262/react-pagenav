@@ -3,7 +3,6 @@ sudo: false
 node_js:
   - "6"
 before_script:
-  - npm install -g gulp
   - npm i react react-dom
-script: gulp test
+
   
