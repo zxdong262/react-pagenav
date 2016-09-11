@@ -57,6 +57,7 @@ describe('react-pagenav', function () {
 		if(_props.handleClick) AppDef.handleClick = _props.handleClick
 
 		var App = React.createClass(AppDef)
+		console.log(window.ReactPagenav)
 		var ReactPagenav = window.ReactPagenav.default
 
 		//ReactPagenav default change

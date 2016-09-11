@@ -1,6 +1,6 @@
 {
   "name": "react-pagenav",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "homepage": "http://html5beta.com/apps/react-pagenav.html",
   "author": {
     "email": "zxdong@gmail.com",
@@ -9,7 +9,7 @@
   },
   "description": "react pagenav component",
   "bugs": "https://github.com/zxdong262/react-pagenav/issues",
-  "main": "dist/react-pagenav.js",
+  "main": "dist/react-pagenav.min.js",
   "moduleType": [
     "globals"
   ],

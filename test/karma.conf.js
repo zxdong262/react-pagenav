@@ -15,9 +15,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'bower_components/react/react.js',
-      'bower_components/react/react-dom.js',
-      'bower_components/jquery/dist/jquery.js',
+      'node_modules/react/dist/react.js',
+      'node_modules/react-dom/dist/react-dom.js',
+      'node_modules/jquery/dist/jquery.js',
       'dist/react-pagenav.js',
       'test/test.js'
     ],
@@ -31,7 +31,7 @@ module.exports = function(config) {
     reporters: ['progress', 'coverage'],
 
     // web server port
-    port: 8084,
+    port: 8078,
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
@@ -42,7 +42,7 @@ module.exports = function(config) {
 
     // Start these browsers, currently available:
     // - Chrome
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
     // Timeouts for SauceLabs
     browserDisconnectTimeout: 10000, // default 2000
@@ -54,14 +54,20 @@ module.exports = function(config) {
     singleRun: true,
 
     preprocessors: {
-      'src/{,*/}*.js': 'coverage'
+      'test/test.js': ['webpack', 'sourcemap']
+    },
+
+    webpack: {
+      devtool: 'inline-source-map'
     },
 
     plugins: [
       'karma-mocha',
       'karma-chai-plugins',
       'karma-phantomjs-launcher',
-      'karma-coverage'
+      'karma-coverage',
+      'karma-webpack',
+      'karma-sourcemap-loader'
     ],
 
     // Coverage reporter generates the coverage
@@ -72,6 +78,6 @@ module.exports = function(config) {
       ]
     }
 
-  });
+  })
 
 };

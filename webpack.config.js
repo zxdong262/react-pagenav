@@ -2,6 +2,8 @@ const webpack = require('webpack')
 const OpenBrowserPlugin = require('open-browser-webpack-plugin')
 const configSys = require('./build/config')
 const UnminifiedWebpackPlugin = require('unminified-webpack-plugin')
+const pack = require('./package.json')
+const today = new Date().toISOString().substr(0, 10) 
 
 let config = {
   entry: {
@@ -77,12 +79,23 @@ if (process.env.NODE_ENV === 'production') {
         warnings: false, // Suppress uglification warnings
       }
     }),
-    new UnminifiedWebpackPlugin()
+    new UnminifiedWebpackPlugin(),
+    new webpack.BannerPlugin(
+      `
+/**
+ * ${pack.name}
+ * @version v${pack.version} - ${today}
+ * @link ${pack.homepage}
+ * @author ${pack.author.name} (${pack.author.email})
+ * @license MIT License, http://www.opensource.org/licenses/MIT
+ */
+      `
+      , { raw: true })
   ]
 
   config.output = {
     path: __dirname + '/dist/', //输出文件目录
-    filename: 'temp.[name].min.js', //输出文件名
+    filename: '[name].min.js', //输出文件名
     libraryTarget: 'umd',
     publicPath: '/'
   }
