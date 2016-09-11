@@ -1,8 +1,7 @@
 /node_modules/
-/bower_components/
-/src/app.jsx
-/src/index.jsx
-/static/
-/public/
+/src/
+/test/
+/build/
+/dist/app*
 /*.js
 /.babelrc

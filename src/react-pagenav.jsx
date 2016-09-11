@@ -36,24 +36,24 @@ class ReactPagenav extends Component {
 
 	static buildUnits(props) {
 
-		var option = ReactPagenav.default
-		var page = props.page || option.page
-		var pageSize = props.pageSize || option.pageSize
-		var total = props.total || option.total
-		var maxLink = props.maxLink >5?props.maxLink:5
+		let option = ReactPagenav.default
+		let page = props.page || option.page
+		let pageSize = props.pageSize || option.pageSize
+		let total = props.total || option.total
+		let maxLink = props.maxLink >5?props.maxLink:5
 
-		var linksCount = Math.ceil(total/pageSize)
+		let linksCount = Math.ceil(total/pageSize)
 
 		if(page > linksCount) page = linksCount + 0
 
-		var hasPrev = page > 1
-		var hasNext = page < linksCount
-		var realMaxLink = maxLink > linksCount?linksCount:maxLink
-		var len1, len2, len3, shouldInsertDots12, shouldInsertDots23
-		var len2Start, len3Start
+		let hasPrev = page > 1
+		let hasNext = page < linksCount
+		let realMaxLink = maxLink > linksCount?linksCount:maxLink
+		let len1, len2, len3, shouldInsertDots12, shouldInsertDots23
+		let len2Start, len3Start
 
-		var units = []
-		var arr = computeLens()
+		let units = []
+		let arr = computeLens()
 
 		units.push({
 			class: hasPrev?'':'disabled'
@@ -66,7 +66,7 @@ class ReactPagenav extends Component {
 			,ariaLabel: option.prevSrHtml
 		})
 
-		var dotUnit = {
+		let dotUnit = {
 			class: 'disabled'
 			,page: page
 			,isPager: false
@@ -75,7 +75,7 @@ class ReactPagenav extends Component {
 			,html: option.dotsHtml
 		}
 
-		for(var i = 0, len = arr.length;i < len;i ++) {
+		for(let i = 0, len = arr.length;i < len;i ++) {
 			pushUnit(arr[i])
 		}
 
@@ -105,20 +105,20 @@ class ReactPagenav extends Component {
 		}
 
 		function computeLens() {
-			var a4 = Math.floor((realMaxLink - 2) / 2)
-			var a5 = realMaxLink - 3 - a4
-			var s2 = page - a4
-			var s3 = page + a5
+			let a4 = Math.floor((realMaxLink - 2) / 2)
+			let a5 = realMaxLink - 3 - a4
+			let s2 = page - a4
+			let s3 = page + a5
 			if(s2 < 2) {
 				s2 = 2
 			}
 			else if(s3 > linksCount) {
 				s2 = linksCount - (realMaxLink - 2)
 			}
-			var arr = [1]
+			let arr = [1]
 			if(s2 > 2) arr.push('dot')
-			var it
-			for(var i = 0, len = realMaxLink - 2 < 1?realMaxLink - 1:realMaxLink - 2;i < len;i ++) {
+			let it
+			for(let i = 0, len = realMaxLink - 2 < 1?realMaxLink - 1:realMaxLink - 2;i < len;i ++) {
 				it = i + s2
 				arr.push(it)
 			}
@@ -134,21 +134,21 @@ class ReactPagenav extends Component {
 
 	createUnit = (unit, index) => {
 
-		var stats = {
+		let stats = {
 			...ReactPagenav.default
 			,...this.props
 		}
-		var span
+		let span
 		if (unit.isPager) {
 			span = <span aria-hidden={true} dangerouslySetInnerHTML={ {__html: unit.html} } />
 		} else {
 			span = <span dangerouslySetInnerHTML={ {__html: unit.html} } />
 		}
-		var sr = null
+		let sr = null
 		if(unit.isPager) {
 			sr = <span className="sr-only" dangerouslySetInnerHTML={ {__html: unit.srHtml} } />
 		}
-		var url = stats.createPageUrl(unit)
+		let url = stats.createPageUrl(unit)
 		return (
 			<li key={index} onClick={this.handleClick.bind(this, unit.page, url)} className={'page-item ' + unit.class}>
 				<a className="page-link" href={url} aria-label={unit.ariaLabel}>
@@ -162,7 +162,7 @@ class ReactPagenav extends Component {
 
 	render() {
 
-		var units = ReactPagenav.buildUnits(this.props)
+		let units = ReactPagenav.buildUnits(this.props)
 
 		return (
 			<nav className="zpagenav">

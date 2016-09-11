@@ -4,7 +4,7 @@
   "description": "react pagenav component",
   "main": "dist/react-pagenav.js",
   "scripts": {
-    "dev": "gulp watch",
+    "start": "npm-run-all -p dev:server dev:client build",
     "build": "rm dist/*.* && NODE_ENV=production ./node_modules/.bin/webpack -p --progress",
     "start": "./node_modules/.bin/npm-run-all -p dev:server dev:client ",
     "dev:server": "node --debug build/dev-server",
@@ -64,8 +64,8 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1"
   },
   "bugs": {
     "url": "https://github.com/zxdong262/react-pagenav/issues"
