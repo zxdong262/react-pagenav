@@ -1,7 +1,7 @@
 
 import React, { Component, PropTypes } from 'react'
 
-export default class ReactPagenav extends Component {
+class ReactPagenav extends Component {
 
 	static propTypes = {
 		page: PropTypes.number
@@ -174,3 +174,5 @@ export default class ReactPagenav extends Component {
 		)
 	}
 }
+
+module.exports = exports.default = ReactPagenav

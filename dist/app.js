@@ -1,12 +1,12 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("React"), require("ReactDOM"));
+		module.exports = factory(require("react"), require("react-dom"));
 	else if(typeof define === 'function' && define.amd)
-		define(["React", "ReactDOM"], factory);
-	else {
-		var a = typeof exports === 'object' ? factory(require("React"), require("ReactDOM")) : factory(root["React"], root["ReactDOM"]);
-		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
-	}
+		define(["react", "react-dom"], factory);
+	else if(typeof exports === 'object')
+		exports["ReactPagenav"] = factory(require("react"), require("react-dom"));
+	else
+		root["ReactPagenav"] = factory(root["React"], root["ReactDOM"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_4__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -83,10 +83,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
@@ -291,7 +287,9 @@ return /******/ (function(modules) { // webpackBootstrap
 			return unit.page === 1 ? '' : '#p=' + unit.page;
 		}
 	};
-	exports.default = ReactPagenav;
+	
+	
+	module.exports = exports.default = ReactPagenav;
 
 /***/ },
 /* 3 */

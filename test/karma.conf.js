@@ -1,7 +1,6 @@
 // Karma configuration
 // http://karma-runner.github.io/0.12/config/configuration-file.html
 
-'use strict';
 
 module.exports = function(config) {
 
@@ -18,7 +17,7 @@ module.exports = function(config) {
       'node_modules/react/dist/react.js',
       'node_modules/react-dom/dist/react-dom.js',
       'node_modules/jquery/dist/jquery.js',
-      'dist/react-pagenav.js',
+      //'dist/react-pagenav.js',
       'test/test.js'
     ],
 
@@ -59,6 +58,18 @@ module.exports = function(config) {
 
     webpack: {
       devtool: 'inline-source-map'
+      ,externals: {
+        'react': 'React',
+        'react-dom': 'ReactDOM',
+        'react-pagenav': 'ReactPagenav'
+      },
+      module: {
+        loaders: [{
+          test: /\.jsx?$/,
+          exclude: /node_modules/,
+          loader: 'babel-loader'
+        }]
+      }
     },
 
     plugins: [

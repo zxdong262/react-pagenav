@@ -97,7 +97,23 @@ if (process.env.NODE_ENV === 'production') {
     path: __dirname + '/dist/', //输出文件目录
     filename: '[name].min.js', //输出文件名
     libraryTarget: 'umd',
-    publicPath: '/'
+    publicPath: '/',
+    library: 'ReactPagenav'
+  }
+
+  config.externals = {
+    react: {
+      root: 'React',
+      commonjs: 'react',
+      commonjs2: 'react',
+      amd: 'react'
+    },
+    'react-dom': {
+      root: 'ReactDOM',
+      commonjs: 'react-dom',
+      commonjs2: 'react-dom',
+      amd: 'react-dom'
+    }
   }
 
   config.devtool = 'source-map'

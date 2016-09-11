@@ -1,7 +1,11 @@
 
+import ReactPagenav from '../dist/react-pagenav.js'
+import React, { Component, PropTypes } from 'react'
+import ReactDOM from 'react-dom'
+
 describe('react-pagenav', function () {
 
-	var scope, sandboxEl
+	let scope, sandboxEl
 
 	beforeEach(function () {
 		sandboxEl = $('<div>').attr('id', 'sandbox').appendTo($('body'))
@@ -15,55 +19,34 @@ describe('react-pagenav', function () {
 		setTimeout(run, 100)
 	}
 	
-	function prepare(_props, _default) {
+	function prepare(_props = {}, _default = {}) {
 
-		_props = _props || {}
-		_default = _default || {}
-		var mountNode = sandboxEl	[0]
+		let mountNode = sandboxEl[0]
+		$.extend(ReactPagenav.default, _default)
+		class App extends Component {
+			constructor(props) {
+				super(props)
+				this.state = $.extend({}, {
+					page: 1
+					,pageSize: 10
+					,total: 509
+					,maxLink: 5
+				}, _props)
+			}
 
-		//props
-		var props = $.extend({}, {
-			page: 1
-			,pageSize: 10
-			,total: 509
-			,maxLink: 5
-		}, _props)
-
-		var AppDef = {
-			getInitialState: function getInitialState() {
-		    return props
-		  }
-			,handleClick: function(page, e) {
+			handleClick(page, e) {
 				this.setState({ page: page })
 			}
-		  ,render: function render() {
-		  	return React.createElement(
-		  		'Div'
-		  		,null
-		  		,React.createElement(
-		  			ReactPagenav
-		  			,{
-							page: this.state.page
-							,pageSize: this.state.pageSize
-							,total: this.state.total
-							,maxLink: this.state.maxLink
-							,onLinkClick: this.handleClick
-		  			}
-		  		)
-		  	)
-		  }
+
+			render() {
+				return <ReactPagenav {...this.state} onLinkClick={this.props.handleClick || this.handleClick.bind(this)}/>
+			}
 		}
 
-		if(_props.handleClick) AppDef.handleClick = _props.handleClick
-
-		var App = React.createClass(AppDef)
-		console.log(window.ReactPagenav)
-		var ReactPagenav = window.ReactPagenav.default
-
-		//ReactPagenav default change
-		$.extend(ReactPagenav.default, _default)
-
-		ReactDOM.render(React.createElement(App, null), mountNode)
+		ReactDOM.render(
+			<App />,
+			mountNode
+		)
 
 	}
 
@@ -74,7 +57,7 @@ describe('react-pagenav', function () {
 		it('init', function(done) {
 			prepare({}, {})
 			setTimeout(function() {
-				var pts = $('#sandbox').find('.page-item')
+				let pts = $('#sandbox').find('.page-item')
 				expect(pts.length).to.equal(8)
 				done()
 			}, 100)
@@ -87,7 +70,7 @@ describe('react-pagenav', function () {
 				pageSize: 509
 			})
 			setTimeout(function() {
-				var pts = $('#sandbox').find('.page-item')
+				let pts = $('#sandbox').find('.page-item')
 				expect(pts.length).to.equal(3)
 				done()
 			}, 100)
@@ -100,7 +83,7 @@ describe('react-pagenav', function () {
 				pageSize: 508
 			})
 			setTimeout(function() {
-				var pts = $('#sandbox').find('.page-item')
+				let pts = $('#sandbox').find('.page-item')
 				expect(pts.length).to.equal(4)
 				done()
 			}, 100)
@@ -117,7 +100,7 @@ describe('react-pagenav', function () {
 			})
 
 			nextTick(function() {
-				var pts = $('#sandbox').find('.page-item')
+				let pts = $('#sandbox').find('.page-item')
 				expect(pts.length).to.equal(9)
 				expect($('#sandbox').find('.page-item.active').text()).to.equal('4')
 				//console.log($('#sandbox').find('.page-item').eq(1))
@@ -132,7 +115,7 @@ describe('react-pagenav', function () {
 				,total: 503
 			})
 			nextTick(function() {
-				var pts = $('#sandbox').find('.page-item')
+				let pts = $('#sandbox').find('.page-item')
 				expect(pts.length).to.equal(53)
 				expect($('#sandbox').find('.page-item.active').text()).to.equal('1')
 				done()
@@ -144,7 +127,7 @@ describe('react-pagenav', function () {
 				maxLink: 1
 			})
 			nextTick(function() {
-				var pts = $('#sandbox').find('.page-item')
+				let pts = $('#sandbox').find('.page-item')
 				expect(pts.length).to.equal(8)
 				expect($('#sandbox').find('.page-item.active').text()).to.equal('1')
 				done()
@@ -156,7 +139,7 @@ describe('react-pagenav', function () {
 				total: 1
 			})
 			nextTick(function() {
-				var pts = $('#sandbox').find('.page-item')
+				let pts = $('#sandbox').find('.page-item')
 				expect(pts.length).to.equal(3)
 				expect($('#sandbox').find('.page-item.active').text()).to.equal('1')
 				done()
@@ -168,7 +151,7 @@ describe('react-pagenav', function () {
 				total: 1
 			})
 			nextTick(function() {
-				var pts = $('#sandbox').find('.page-item')
+				let pts = $('#sandbox').find('.page-item')
 				expect(pts.length).to.equal(3)
 				expect($('#sandbox').find('.page-item.active').text()).to.equal('1')
 				done()
@@ -183,11 +166,11 @@ describe('react-pagenav', function () {
 			prepare()
 
 			nextTick(function() {
-				var pts = $('#sandbox').find('.page-item')
+				let pts = $('#sandbox').find('.page-item')
 				expect(pts.length).to.equal(8)
 				$('#sandbox .page-item').eq(2).trigger('click')
 				nextTick(function() {
-					var pts = $('#sandbox').find('.page-item')
+					let pts = $('#sandbox').find('.page-item')
 					expect(pts.length).to.equal(8)
 					expect($('#sandbox').find('.page-item.active').text()).to.equal('2')
 					done()
@@ -200,11 +183,11 @@ describe('react-pagenav', function () {
 			prepare()
 
 			nextTick(function() {
-				var pts = $('#sandbox').find('.page-item')
+				let pts = $('#sandbox').find('.page-item')
 				expect(pts.length).to.equal(8)
 				$('#sandbox .page-item').eq(2).trigger('click')
 				nextTick(function() {
-					var pts = $('#sandbox').find('.page-item')
+					let pts = $('#sandbox').find('.page-item')
 					expect(pts.length).to.equal(8)
 					expect($('#sandbox').find('.page-item.active').text()).to.equal('2')
 					done()
@@ -217,11 +200,11 @@ describe('react-pagenav', function () {
 			prepare()
 
 			nextTick(function() {
-				var pts = $('#sandbox').find('.page-item')
+				let pts = $('#sandbox').find('.page-item')
 				expect(pts.length).to.equal(8)
 				$('#sandbox .page-item:last').trigger('click')
 				nextTick(function() {
-					var pts = $('#sandbox').find('.page-item')
+					let pts = $('#sandbox').find('.page-item')
 					expect(pts.length).to.equal(8)
 					expect($('#sandbox').find('.page-item.active').text()).to.equal('2')
 					done()
@@ -234,11 +217,11 @@ describe('react-pagenav', function () {
 			prepare()
 
 			nextTick(function() {
-				var pts = $('#sandbox').find('.page-item')
+				let pts = $('#sandbox').find('.page-item')
 				expect(pts.length).to.equal(8)
 				$('#sandbox .page-item').eq(6).trigger('click')
 				nextTick(function() {
-					var pts = $('#sandbox').find('.page-item')
+					let pts = $('#sandbox').find('.page-item')
 					expect(pts.length).to.equal(8)
 					expect($('#sandbox').find('.page-item.active').text()).to.equal('51')
 					done()
@@ -256,7 +239,7 @@ describe('react-pagenav', function () {
 				prevHtml: 'prev'
 			})
 			nextTick(function() {
-				var pts = $('#sandbox').find('.page-item')
+				let pts = $('#sandbox').find('.page-item')
 				expect($('#sandbox').find('.page-item').eq(0).find('span').eq(0).text()).to.equal('prev')
 				done()
 			})
@@ -268,7 +251,7 @@ describe('react-pagenav', function () {
 				nextHtml: 'next'
 			})
 			nextTick(function() {
-				var pts = $('#sandbox').find('.page-item')
+				let pts = $('#sandbox').find('.page-item')
 				expect($('#sandbox').find('.page-item').eq(7).find('span').eq(0).text()).to.equal('next')
 				done()
 			})
@@ -280,7 +263,7 @@ describe('react-pagenav', function () {
 				prevSrHtml: 'prev0'
 			})
 			nextTick(function() {
-				var pts = $('#sandbox').find('.page-item')
+				let pts = $('#sandbox').find('.page-item')
 				expect($('#sandbox').find('.page-item').eq(0).find('.sr-only').html()).to.equal('prev0')
 				done()
 			})
@@ -292,7 +275,7 @@ describe('react-pagenav', function () {
 				nextSrHtml: 'next0'
 			})
 			nextTick(function() {
-				var pts = $('#sandbox').find('.page-item')
+				let pts = $('#sandbox').find('.page-item')
 				expect($('#sandbox').find('.page-item').eq(7).find('.sr-only').html()).to.equal('next0')
 				done()
 			})

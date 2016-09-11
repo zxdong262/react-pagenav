@@ -39,6 +39,15 @@ app.use(
   )
 )
 
+app.use(
+  mount(
+    '/_dist',
+    serve(path.resolve(__dirname, '../dist'), {
+      maxAge: oneYear
+    })
+  )
+)
+
 router.get('/', function* (next) {
   this.render('index', {
     siteName: pack.name,
