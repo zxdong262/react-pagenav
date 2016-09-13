@@ -93,6 +93,11 @@ if (process.env.NODE_ENV === 'production') {
       , { raw: true })
   ]
 
+  config.entry = {
+    'react-pagenav': ['./src/react-pagenav.jsx'],
+    app: './src/app.jsx'
+  },
+
   config.output = {
     path: __dirname + '/dist/', //输出文件目录
     filename: '[name].min.js', //输出文件名
