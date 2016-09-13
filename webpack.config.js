@@ -95,7 +95,7 @@ if (process.env.NODE_ENV === 'production') {
 
   config.entry = {
     'react-pagenav': ['./src/react-pagenav.jsx'],
-    app: './src/app.jsx'
+    app: './src/index.jsx'
   },
 
   config.output = {

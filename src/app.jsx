@@ -8,9 +8,6 @@ export default class App extends Component {
 		,total: 300
 		,pageSize: 10
 		,maxLink: 5
-		,lang: {
-			total: 't'
-		}
 	}
 
 	constructor(props) {
@@ -30,7 +27,7 @@ export default class App extends Component {
 	render() {
 
 		var createPageUrl = function(unit) {
-			return unit.page  === 1?'':'#p=' + unit.page
+			return unit.page  === 1?'#':'#p=' + unit.page
 		}
 
 		var names = Object.keys(this.state)
