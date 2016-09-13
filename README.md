@@ -29,6 +29,13 @@ export default class App extends Component {
         ,total: 300
         ,pageSize: 10
         ,maxLink: 5
+
+        //optional pagenav unit render, must not be arrow function
+        ,unitRender: function(unit, index) { ... }
+
+        //optional pagenav render, replace default render function
+        //fully customize your pagenav html and function
+        ,render: (units, props) => { ... }
     }
 
     constructor(props) {
@@ -46,7 +53,7 @@ export default class App extends Component {
 
         return (
             <div>
-                <ReactPagenav {...this.state} onLinkClick={this.handleClick} createPageUrl={createPageUrl}></ReactPagenav>
+                <ReactPagenav {...this.state} onLinkClick={this.handleClick.bind(this)} />
             </div>
         )
 
@@ -77,6 +84,9 @@ static default = {
     ,createPageUrl: function(unit) {
         return unit.page  === 1?'':'#p=' + unit.page
     }
+    ,lang: {
+			total: 'total'
+		}
 }
 
 import ReactPagenav from 'react-pagenav'
@@ -85,7 +95,7 @@ ReactPagenav.default.prevHtml = '<'
 
 ```
 
-### style it, these example css is from bootstrap4
+### style it, these example css is from bootstrap4 for default render
 ```css
 .sr-only {
   position: absolute;
@@ -257,10 +267,13 @@ ReactPagenav.default.prevHtml = '<'
 git clone https://github.com/zxdong262/react-pagenav.git
 cd react-pagenav
 npm install
-npm run dev
+
+# develop
+npm start
+
+# test
 npm run test
 
-# then visit http://localhost:8082
 ```
 
 ## License

@@ -108,31 +108,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 			var _this = _possibleConstructorReturn(this, (ReactPagenav.__proto__ || Object.getPrototypeOf(ReactPagenav)).call(this, props));
 	
-			_this.createUnit = function (unit, index) {
-	
-				var stats = _extends({}, ReactPagenav.default, _this.props);
-				var span;
-				if (unit.isPager) {
-					span = _react2.default.createElement('span', { 'aria-hidden': true, dangerouslySetInnerHTML: { __html: unit.html } });
-				} else {
-					span = _react2.default.createElement('span', { dangerouslySetInnerHTML: { __html: unit.html } });
-				}
-				var sr = null;
-				if (unit.isPager) {
-					sr = _react2.default.createElement('span', { className: 'sr-only', dangerouslySetInnerHTML: { __html: unit.srHtml } });
-				}
-				var url = stats.createPageUrl(unit);
-				return _react2.default.createElement(
-					'li',
-					{ key: index, onClick: _this.handleClick.bind(_this, unit.page, url), className: 'page-item ' + unit.class },
-					_react2.default.createElement(
-						'a',
-						{ className: 'page-link', href: url, 'aria-label': unit.ariaLabel },
-						span,
-						sr
-					)
-				);
-			};
+			_initialiseProps.call(_this);
 	
 			return _this;
 		}
@@ -146,123 +122,40 @@ return /******/ (function(modules) { // webpackBootstrap
 			}
 		}, {
 			key: 'render',
-			value: function render() {
+			value: function (_render) {
+				function render() {
+					return _render.apply(this, arguments);
+				}
 	
-				var units = ReactPagenav.buildUnits(this.props);
+				render.toString = function () {
+					return _render.toString();
+				};
 	
+				return render;
+			}(function () {
+				var props = this.props;
+	
+				var units = ReactPagenav.default.buildUnits(props);
+				var lang = _extends({}, ReactPagenav.default.lang, props.lang);
+				var opts = _extends({}, ReactPagenav.default, props);
+				if (props.render) return render.bind(units, props);
 				return _react2.default.createElement(
 					'nav',
 					{ className: 'zpagenav' },
 					_react2.default.createElement(
 						'span',
 						{ className: 'pagination page-link m-r-1' },
-						'total:',
+						lang.total,
+						': ',
 						this.props.total
 					),
 					_react2.default.createElement(
 						'ul',
 						{ className: 'pagination' },
-						units.map(this.createUnit)
+						units.map((props.unitRender || this.unitRender).bind(this))
 					)
 				);
-			}
-		}], [{
-			key: 'buildUnits',
-			value: function buildUnits(props) {
-	
-				var option = ReactPagenav.default;
-				var page = props.page || option.page;
-				var pageSize = props.pageSize || option.pageSize;
-				var total = props.total || option.total;
-				var maxLink = props.maxLink > 5 ? props.maxLink : 5;
-	
-				var linksCount = Math.ceil(total / pageSize);
-	
-				if (page > linksCount) page = linksCount + 0;
-	
-				var hasPrev = page > 1;
-				var hasNext = page < linksCount;
-				var realMaxLink = maxLink > linksCount ? linksCount : maxLink;
-				var len1, len2, len3, shouldInsertDots12, shouldInsertDots23;
-				var len2Start, len3Start;
-	
-				var units = [];
-				var arr = computeLens();
-	
-				units.push({
-					class: hasPrev ? '' : 'disabled',
-					page: hasPrev ? page - 1 : page,
-					isPager: true,
-					isPrev: true,
-					isNext: false,
-					html: option.prevHtml,
-					srHtml: option.prevSrHtml,
-					ariaLabel: option.prevSrHtml
-				});
-	
-				var dotUnit = {
-					class: 'disabled',
-					page: page,
-					isPager: false,
-					isPrev: false,
-					isNext: true,
-					html: option.dotsHtml
-				};
-	
-				for (var i = 0, len = arr.length; i < len; i++) {
-					pushUnit(arr[i]);
-				}
-	
-				units.push({
-					class: hasNext ? '' : 'disabled',
-					page: hasNext ? page + 1 : page,
-					isPager: true,
-					isPrev: false,
-					isNext: true,
-					html: option.nextHtml,
-					srHtml: option.nextSrHtml,
-					ariaLabel: option.nextSrHtml
-				});
-	
-				function pushUnit(i) {
-					if (typeof i === 'number') {
-						units.push({
-							page: i,
-							isPrev: false,
-							isPager: false,
-							disabled: false,
-							class: i === page ? 'active' : '',
-							isNext: false,
-							html: i
-						});
-					} else units.push(dotUnit);
-				}
-	
-				function computeLens() {
-					var a4 = Math.floor((realMaxLink - 2) / 2);
-					var a5 = realMaxLink - 3 - a4;
-					var s2 = page - a4;
-					var s3 = page + a5;
-					if (s2 < 2) {
-						s2 = 2;
-					} else if (s3 > linksCount) {
-						s2 = linksCount - (realMaxLink - 2);
-					}
-					var arr = [1];
-					if (s2 > 2) arr.push('dot');
-					var it;
-					for (var i = 0, len = realMaxLink - 2 < 1 ? realMaxLink - 1 : realMaxLink - 2; i < len; i++) {
-						it = i + s2;
-						arr.push(it);
-					}
-					if (it < linksCount - 1) arr.push('dot');
-					if (it < linksCount) arr.push(linksCount);
-					return arr;
-				}
-	
-				return units;
-				//end unit
-			}
+			})
 		}]);
 	
 		return ReactPagenav;
@@ -272,7 +165,12 @@ return /******/ (function(modules) { // webpackBootstrap
 		page: _react.PropTypes.number,
 		total: _react.PropTypes.number,
 		pageSize: _react.PropTypes.number,
-		maxLink: _react.PropTypes.number
+		maxLink: _react.PropTypes.number,
+		onLinkClick: _react.PropTypes.func,
+		renderUnit: _react.PropTypes.func,
+		render: _react.PropTypes.func,
+		lang: _react.PropTypes.object,
+		reatePageUrl: _react.PropTypes.func
 	};
 	ReactPagenav.default = {
 		page: 1,
@@ -284,10 +182,137 @@ return /******/ (function(modules) { // webpackBootstrap
 		nextSrHtml: 'Next',
 		dotsHtml: '...',
 		createPageUrl: function createPageUrl(unit) {
-			return unit.page === 1 ? '' : '#p=' + unit.page;
+			return unit.page === 1 ? '#' : '#p=' + unit.page;
+		},
+		lang: {
+			total: 'total'
+		},
+		buildUnits: function buildUnits(props) {
+	
+			var option = ReactPagenav.default;
+			var page = props.page || option.page;
+			var pageSize = props.pageSize || option.pageSize;
+			var total = props.total || option.total;
+			var maxLink = props.maxLink > 5 ? props.maxLink : 5;
+	
+			var linksCount = Math.ceil(total / pageSize);
+	
+			if (page > linksCount) page = linksCount + 0;
+	
+			var hasPrev = page > 1;
+			var hasNext = page < linksCount;
+			var realMaxLink = maxLink > linksCount ? linksCount : maxLink;
+			var len1 = void 0,
+			    len2 = void 0,
+			    len3 = void 0,
+			    shouldInsertDots12 = void 0,
+			    shouldInsertDots23 = void 0;
+			var len2Start = void 0,
+			    len3Start = void 0;
+	
+			var units = [];
+			var arr = computeLens();
+	
+			units.push({
+				class: hasPrev ? '' : 'disabled',
+				page: hasPrev ? page - 1 : page,
+				isPager: true,
+				isPrev: true,
+				isNext: false,
+				html: option.prevHtml,
+				srHtml: option.prevSrHtml,
+				ariaLabel: option.prevSrHtml
+			});
+	
+			var dotUnit = {
+				class: 'disabled',
+				page: page,
+				isPager: false,
+				isPrev: false,
+				isNext: true,
+				html: option.dotsHtml
+			};
+	
+			for (var i = 0, len = arr.length; i < len; i++) {
+				pushUnit(arr[i]);
+			}
+	
+			units.push({
+				class: hasNext ? '' : 'disabled',
+				page: hasNext ? page + 1 : page,
+				isPager: true,
+				isPrev: false,
+				isNext: true,
+				html: option.nextHtml,
+				srHtml: option.nextSrHtml,
+				ariaLabel: option.nextSrHtml
+			});
+	
+			function pushUnit(i) {
+				if (typeof i === 'number') {
+					units.push({
+						page: i,
+						isPrev: false,
+						isPager: false,
+						disabled: false,
+						class: i === page ? 'active' : '',
+						isNext: false,
+						html: i
+					});
+				} else units.push(dotUnit);
+			}
+	
+			function computeLens() {
+				var a4 = Math.floor((realMaxLink - 2) / 2);
+				var a5 = realMaxLink - 3 - a4;
+				var s2 = page - a4;
+				var s3 = page + a5;
+				if (s2 < 2) {
+					s2 = 2;
+				} else if (s3 > linksCount) {
+					s2 = linksCount - (realMaxLink - 2);
+				}
+				var arr = [1];
+				if (s2 > 2) arr.push('dot');
+				var it = void 0;
+				for (var _i = 0, _len = realMaxLink - 2 < 1 ? realMaxLink - 1 : realMaxLink - 2; _i < _len; _i++) {
+					it = _i + s2;
+					arr.push(it);
+				}
+				if (it < linksCount - 1) arr.push('dot');
+				if (it < linksCount) arr.push(linksCount);
+				return arr;
+			}
+	
+			return units;
+			//end unit
 		}
 	};
 	
+	var _initialiseProps = function _initialiseProps() {
+		var _this2 = this;
+	
+		this.unitRender = function (unit, index) {
+	
+			var stats = _extends({}, ReactPagenav.default, _this2.props);
+			var span = unit.isPager ? _react2.default.createElement('span', { 'aria-hidden': true, dangerouslySetInnerHTML: { __html: unit.html } }) : _react2.default.createElement('span', { dangerouslySetInnerHTML: { __html: unit.html } });
+	
+			var sr = unit.isPager ? _react2.default.createElement('span', { className: 'sr-only', dangerouslySetInnerHTML: { __html: unit.srHtml } }) : null;
+	
+			var url = stats.createPageUrl(unit);
+	
+			return _react2.default.createElement(
+				'li',
+				{ key: index, onClick: _this2.handleClick.bind(_this2, unit.page, url), className: 'page-item ' + unit.class },
+				_react2.default.createElement(
+					'a',
+					{ className: 'page-link', href: url, 'aria-label': unit.ariaLabel },
+					span,
+					sr
+				)
+			);
+		};
+	};
 	
 	module.exports = exports.default = ReactPagenav;
 
@@ -335,7 +360,10 @@ return /******/ (function(modules) { // webpackBootstrap
 				page: 1,
 				total: 300,
 				pageSize: 10,
-				maxLink: 5
+				maxLink: 5,
+				lang: {
+					total: 't'
+				}
 			};
 	
 			_this.handleClick = function (page, url, e) {
@@ -376,7 +404,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									'*',
 									name
 								),
-								_react2.default.createElement('input', { className: 'form-control', type: 'value', name: name, onChange: this.handleChange.bind(this, name), value: this.state[name] })
+								_react2.default.createElement('input', { className: 'form-control', type: 'value', name: name, onChange: this.handleChange.bind(this, name), defaultValue: this.state[name] })
 							);
 						}, this)
 					),

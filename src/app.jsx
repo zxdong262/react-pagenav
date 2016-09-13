@@ -8,6 +8,9 @@ export default class App extends Component {
 		,total: 300
 		,pageSize: 10
 		,maxLink: 5
+		,lang: {
+			total: 't'
+		}
 	}
 
 	constructor(props) {
@@ -40,7 +43,7 @@ export default class App extends Component {
 							return (
 								<div key={index} className="form-group" >
 									<label>*{name}</label>
-									<input className="form-control" type="value" name={name} onChange={this.handleChange.bind(this, name)} value={this.state[name]} />
+									<input className="form-control" type="value" name={name} onChange={this.handleChange.bind(this, name)} defaultValue={this.state[name]} />
 								</div>
 							)
 						}, this)

@@ -39,7 +39,7 @@ describe('react-pagenav', function () {
 			}
 
 			render() {
-				return <ReactPagenav {...this.state} onLinkClick={this.props.handleClick || this.handleClick.bind(this)}/>
+				return <ReactPagenav {...this.state} onLinkClick={(this.props.handleClick || this.handleClick).bind(this)}/>
 			}
 		}
 
@@ -103,8 +103,7 @@ describe('react-pagenav', function () {
 				let pts = $('#sandbox').find('.page-item')
 				expect(pts.length).to.equal(9)
 				expect($('#sandbox').find('.page-item.active').text()).to.equal('4')
-				//console.log($('#sandbox').find('.page-item').eq(1))
-				expect($('#sandbox').find('.page-item').eq(1).find('a').prop('href').indexOf('#') === -1).to.equal(true)
+				expect($('#sandbox').find('.page-item').eq(1).find('a').prop('href')).to.equal('http://localhost:8078/context.html#')
 				done()
 			})
 		})
@@ -154,6 +153,52 @@ describe('react-pagenav', function () {
 				let pts = $('#sandbox').find('.page-item')
 				expect(pts.length).to.equal(3)
 				expect($('#sandbox').find('.page-item.active').text()).to.equal('1')
+				done()
+			})
+		})
+
+		it('init lang.total=cutsom', function(done) {
+			prepare({
+				lang: {
+					total: 'custom'
+				}
+			})
+			nextTick(function() {
+				expect($('#sandbox').find('.pagination').eq(0).text()).to.equal('custom: 509')
+				done()
+			})
+		})
+
+		it('init unitRender', function(done) {
+			prepare({
+				unitRender: function(unit, index) {
+
+					let stats = {
+						...ReactPagenav.default
+						,...this.props
+					}
+					let span = unit.isPager
+										?<span aria-hidden={true} dangerouslySetInnerHTML={ {__html: unit.html} } />
+										:<span dangerouslySetInnerHTML={ {__html: unit.html} } />
+
+					let sr = unit.isPager
+									?<span className="sr-only" dangerouslySetInnerHTML={ {__html: unit.srHtml} } />
+									:null
+
+					let url = stats.createPageUrl(unit)
+
+					return (
+						<li key={index} onClick={this.handleClick.bind(this, unit.page, url)} className={'page-item ' + unit.class}>
+							<a className="page-link" href={url} aria-label={unit.ariaLabel}>
+								{span}
+							</a>
+						</li>
+					)
+
+				}
+			})
+			nextTick(function() {
+				expect($('#sandbox').find('.sr-only').length).to.equal(0)
 				done()
 			})
 		})
@@ -277,6 +322,22 @@ describe('react-pagenav', function () {
 			nextTick(function() {
 				let pts = $('#sandbox').find('.page-item')
 				expect($('#sandbox').find('.page-item').eq(7).find('.sr-only').html()).to.equal('next0')
+				done()
+			})
+		})
+
+		it('lang.total', function(done) {
+
+			prepare({
+
+			}, {
+				lang: {
+					total: 'total page'
+				}
+			})
+			nextTick(function() {
+				let pts = $('#sandbox').find('.page-item')
+				expect($('#sandbox').find('.pagination').eq(0).text()).to.equal('total page: 509')
 				done()
 			})
 		})
