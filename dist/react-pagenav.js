@@ -152,10 +152,10 @@ return /******/ (function(modules) { // webpackBootstrap
 		pageSize: _react.PropTypes.number,
 		maxLink: _react.PropTypes.number,
 		onLinkClick: _react.PropTypes.func,
-		renderUnit: _react.PropTypes.func,
+		unitRender: _react.PropTypes.func,
 		render: _react.PropTypes.func,
 		lang: _react.PropTypes.object,
-		reatePageUrl: _react.PropTypes.func
+		createPageUrl: _react.PropTypes.func
 	};
 	ReactPagenav.default = {
 		page: 1,

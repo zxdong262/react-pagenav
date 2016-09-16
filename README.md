@@ -45,6 +45,7 @@ export default class App extends Component {
     handleClick = (page, url, e) => {
         this.setState({ page: page })
     }
+    
     render() {
 
         var createPageUrl = function(unit) {

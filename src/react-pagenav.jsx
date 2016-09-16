@@ -9,10 +9,10 @@ class ReactPagenav extends Component {
 		,pageSize: PropTypes.number
 		,maxLink: PropTypes.number
 		,onLinkClick: PropTypes.func
-		,renderUnit: PropTypes.func
+		,unitRender: PropTypes.func
 		,render: PropTypes.func
 		,lang: PropTypes.object
-		,reatePageUrl: PropTypes.func
+		,createPageUrl: PropTypes.func
 	}
 
 	static default = {
