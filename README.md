@@ -280,5 +280,5 @@ npm run test
 ## License
 MIT
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/zxdong262/react-pagenav/master.svg?style=flat-square
+[codecov-badge]: https://img.shields.io/codecov/c/github/zxdong262/react-pagenav/dev.svg?style=flat-square
 [codecov]: https://codecov.io/gh/zxdong262/react-pagenav
