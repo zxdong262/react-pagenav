@@ -17,7 +17,11 @@ module.exports = function(config) {
       'node_modules/react/dist/react.js',
       'node_modules/react-dom/dist/react-dom.js',
       'node_modules/jquery/dist/jquery.js',
-      //'dist/react-pagenav.js',
+      {
+        pattern: './dist/react-pagenav.js',
+        included: false,
+        watched: true
+      },
       'test/test.js'
     ],
 
@@ -53,7 +57,8 @@ module.exports = function(config) {
     singleRun: true,
 
     preprocessors: {
-      'test/test.js': ['webpack', 'sourcemap']
+      'test/test.js': ['webpack', 'sourcemap', 'coverage'],
+      'dist/react-pagenav.js': ['coverage']
     },
 
     webpack: {
@@ -64,11 +69,21 @@ module.exports = function(config) {
         'react-pagenav': 'ReactPagenav'
       },
       module: {
-        loaders: [{
-          test: /\.jsx?$/,
-          exclude: /node_modules/,
-          loader: 'babel-loader'
-        }]
+        loaders: [
+          {
+            test: /\.jsx?$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader'
+          }
+        ]
+        ,postLoaders: [
+          { //delays coverage til after tests are run, fixing transpiled source coverage error
+            test: /\react\-pagenav\.js$/,
+            exclude: /(test|node_modules)\//,
+            include: ['dist'],
+            loader: 'istanbul-instrumenter'
+          } 
+        ]
       }
     },
 
