@@ -1,6 +1,7 @@
 # react-pagenav
 [![Build Status](https://travis-ci.org/zxdong262/react-pagenav.svg?branch=master)](https://travis-ci.org/zxdong262/react-pagenav)
 [![Codecov][codecov-badge]][codecov]
+
 react pagenav component
 
 ## doc/demo
