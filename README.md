@@ -1,7 +1,4 @@
-# react-pagenav
-[![Build Status](https://travis-ci.org/zxdong262/react-pagenav.svg?branch=master)](https://travis-ci.org/zxdong262/react-pagenav)
-[![Codecov][codecov-badge]][codecov]
-
+# react-pagenav [![Travis][build-badge]][build] [![Codecov][codecov-badge]][codecov]
 react pagenav component
 
 ## doc/demo
@@ -281,5 +278,7 @@ npm run test
 ## License
 MIT
 
+[build-badge]: https://img.shields.io/travis/zxdong262/react-pagenav/master.svg?style=flat-square
+[build]: https://travis-ci.org/zxdong262/react-pagenav
 [codecov-badge]: https://img.shields.io/codecov/c/github/zxdong262/react-pagenav/dev.svg?style=flat-square
 [codecov]: https://codecov.io/gh/zxdong262/react-pagenav
