@@ -1,4 +1,7 @@
-# react-pagenav [![Travis][build-badge]][build] [![Codecov][codecov-badge]][codecov]
+# react-pagenav
+
+[![Travis][build-badge]][build] [![Codecov][codecov-badge]][codecov]
+
 react pagenav component
 
 ## doc/demo

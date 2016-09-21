@@ -4,9 +4,8 @@
   "description": "react pagenav component",
   "main": "dist/react-pagenav.js",
   "scripts": {
-    "start": "npm run dev:server && npm run dev:client && npm run build",
     "build": "rm dist/*.* && NODE_ENV=production ./node_modules/.bin/webpack -p --progress",
-    "start": "./node_modules/.bin/npm-run-all -p dev:server dev:client ",
+    "start": "./node_modules/.bin/run-p dev:server dev:client build",
     "dev:server": "node build/dev-server",
     "dev:server-debug": "node --debug build/dev-server",
     "dev:client": "./node_modules/.bin/webpack-dev-server --progress --colors --inline --content-base dist/",
